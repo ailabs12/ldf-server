@@ -1,0 +1,99 @@
+{
+  "title": "Linked Data Fragments server",
+  "baseURL": "http://172.17.4.101:3001/",
+
+  "port": "3001",
+  "workers": 1,
+
+  "datasources": {
+    "quad": {
+      "title": "quad",
+      "type": "TurtleDatasource",
+      "description": "quad test",
+      "settings": { "file": "./friends.nq" }
+    },
+    "click": {
+      "title": "click house",
+      "type": "ClickHouseDatasource",
+      "description": "clickhouse",
+      "settings": {
+        "host": "172.17.4.101",
+        "port": 8123,
+        "username": "default",
+        "password": "",
+        "database": "ldf",
+        "table": "triples"
+      }
+    },
+    "mysql3lex": {
+      "title": "my sql with 3 lexicons ldf/orgf",
+      "type": "SQLDatasource",
+      "description": "my sql with 3 lexicons",
+      "settings": {
+        "dialect": "mysql",
+        "database": "ldf",
+        "table": "orgf",
+        "url": "172.17.4.14",
+        "port": "3306",
+        "username": "root",
+        "password": "root"
+      }
+    },
+    "hdt": {
+      "title": "HDT",
+      "type": "HdtDatasource",
+      "description": "orgf on hdt",
+      "settings": { "file": "/home/ubuntu/ldf/data/orgf.hdt" }
+    },
+    "redbook": {
+      "title": "RedBook",
+      "type": "TurtleDatasource",
+      "description": "Red book of russian uncommon words",
+      "settings": { "file": "/home/ubuntu/ldf/data/redbook.ttl" }
+    }
+  },
+
+  "dereference": {},
+
+  "prefixes": {
+    "rdf":   "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs":  "http://www.w3.org/2000/01/rdf-schema#",
+    "owl":   "http://www.w3.org/2002/07/owl#",
+    "xsd":   "http://www.w3.org/2001/XMLSchema#",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+    "void":  "http://rdfs.org/ns/void#",
+    "lexinfo": "http://www.lexinfo.net/ontology/2.0/lexinfo#",
+    "ontolex": "http://www.w3.org/ns/lemon/ontolex#"
+  },
+
+  "routers": [
+    "DatasourceRouter",
+    "TriplePatternRouter",
+    "PageRouter"
+  ],
+
+  "controllers": [
+    "SummaryController",
+    "TimegateController",
+    "TriplePatternFragmentsController",
+    "AssetsController",
+    "DereferenceController",
+    "NotFoundController"
+  ],
+
+  "response": {
+    "headers": {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Accept-Datetime",
+      "Access-Control-Expose-Headers": "Content-Location,Link,Memento-Datetime"
+    }
+  },
+
+  "extensions": {
+    "TriplePatternFragmentsController": [
+      "MementoControllerExtension"
+    ]
+  },
+
+  "logging": { "enabled": true, "file": "access.log" }
+}

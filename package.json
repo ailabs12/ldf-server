@@ -1,0 +1,59 @@
+{
+  "name": "ldf-server",
+  "description": "Linked Data Fragments Server",
+  "version": "2.2.3",
+  "license": "MIT",
+  "engines": {
+    "node": ">=4.0"
+  },
+  "bin": {
+    "ldf-server": "./bin/ldf-server"
+  },
+  "main": "module.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:LinkedDataFragments/Server.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LinkedDataFragments/Server.js/issues"
+  },
+  "scripts": {
+    "test": "mocha",
+    "lint": "eslint bin/* lib test",
+    "start": "./bin/ldf-server ./_testConfig_.json"
+  },
+  "dependencies": {
+    "@apla/clickhouse": "^1.5.3",
+    "asynciterator": "^1.1.0",
+    "forwarded-parse": "^2.0.0",
+    "jsonld": "^0.4.11",
+    "lodash": "^2.4.2",
+    "lru-cache": "^4.0.1",
+    "mime": "^1.3.4",
+    "n3": "^0.7.0",
+    "negotiate": "^1.0.1",
+    "q": "^1.4.1",
+    "qejs": "^3.0.5",
+    "request": "^2.72.0",
+    "sql-triplestore": "cnstntn-kndrtv/sql-triplestore",
+    "uritemplate": "^0.3.4"
+  },
+  "optionalDependencies": {
+    "access-log": "^0.3.9",
+    "hdt": "^1.4.0",
+    "parse-cache-control": "^1.0.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.4.0",
+    "mocha": "^3.0.2",
+    "pre-commit": "^1.1.3",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0",
+    "supertest": "^2.0.0"
+  },
+  "pre-commit": [
+    "lint",
+    "test"
+  ]
+}

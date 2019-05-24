@@ -1,0 +1,15 @@
+<% /* @license MIT ©2013-2016 Ruben Verborgh, Ghent University - imec */ -%>
+<% inherits('base') %>
+<h2>Resource not found</h2>
+<p>
+  No resource with URL <code><%= url %></code> was found.
+</p>
+
+<h3>Available datasets</h3>
+<ul>
+<% for (var datasourceName in datasources) {
+     var datasource = datasources[datasourceName];
+     if (datasource.hide) continue; %>
+  <li><a href="<%= datasource.url.replace(/#.*$/, '') %>"><%= datasource.title %></a></li>
+<% } %>
+</ul>
